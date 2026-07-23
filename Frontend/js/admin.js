@@ -14,6 +14,8 @@
 // admin (e.g. GET /api/admin/orders). That is why the admin must type the
 // Order ID manually. See the comment in admin.html.
 
+
+import { apiRequest, showMessage, escapeHtml, formatPrice, isAdmin, requireLogin } from "./common.js";
 document.addEventListener("DOMContentLoaded", () => {
   // Only admins may use this page.
   if (!requireLogin()) return;
@@ -24,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   loadAdminProducts();
-
+  loadAllOrders();
   // Product form submit (add or update).
   document.getElementById("product-form").addEventListener("submit", saveProduct);
   document.getElementById("cancel-edit").addEventListener("click", resetForm);
@@ -85,6 +87,88 @@ async function loadAdminProducts() {
   } catch (err) {
     area.textContent = "Unable to load products.";
     showMessage(err.message || "Unable to load products.", "error");
+  }
+}
+// --------------------Order List--------------------
+async function updateOrderStatusWithId(id, status,e) {
+  e.preventDefault();
+  if (!id || !status) {
+    showMessage("Order ID and new status are required.", "error");
+    return;
+  }
+  
+  try {
+    // PUT /api/orders/:id/status
+    // The backend expects the field name "orderStatus".
+    await apiRequest("/orders/" + id + "/status", {
+      method: "PUT",
+      body: { orderStatus: status },
+    });
+    showMessage("Order status updated to " + status, "success");
+    document.getElementById("status-form").reset();
+  } catch (err) {
+    showMessage(err.message || "Failed to update order status.", "error");
+  }
+}
+async function loadAllOrders() {
+  const area = document.getElementById("admin-order-area");
+  const table = document.getElementById("admin-order-table");
+  const tbody = document.getElementById("admin-order-rows");
+  try {
+    // GET /api/admin/orders
+    const orders = await apiRequest("/admin/orders");
+
+    area.style.display = "none";
+
+    if (!orders || orders.length === 0) {
+      area.style.display = "block";
+      area.textContent = "No orders found.";
+      return;
+    }
+
+    table.style.display = "block";
+
+    tbody.innerHTML = orders
+      .map(
+        (o,i) => `
+      <tr class="order-row">
+        <td>${i + 1}</td>
+        <td>${escapeHtml(o.user.name)}</td>
+        <td>${escapeHtml(o.totalAmount || "")}</td>
+        <td id="row-order-status-${o._id}">${escapeHtml(o.orderStatus || "")}</td>
+        <td>${escapeHtml(o.paymentStatus || "")}</td>
+        <td>
+        <form id="status-form-${o._id}" data-id="${o._id}" class="inline-form">
+          <input type="text" value="${o._id}" disabled placeholder="Order ID" required />
+          <select id="order-status-${o._id}" name="orderStatus" required>
+            <option value="" selected>Select Status</option>
+            <option value="Placed">Placed</option>
+            <option value="Confirmed">Confirmed</option>
+            <option value="Preparing">Preparing</option>
+            <option value="Out for Delivery">Out for Delivery</option>
+            <option value="Delivered">Delivered</option>
+            <option value="Cancelled">Cancelled</option>
+          </select>
+          <button type="button" data-order-id="${o._id}" data-order-status-id="order-status-${o._id}" class="btn update-order-status-btn">Update Status</button>
+        </form>
+        </td>
+      </tr>`
+      )
+      .join("");
+
+    document.querySelectorAll(".update-order-status-btn").forEach((btn) => {
+      btn.addEventListener("click", async (e) => {
+        const orderId = btn.dataset.orderId;
+        const statusEl = document.getElementById(btn.dataset.orderStatusId);
+        const status = statusEl ? statusEl.value : "";
+        await updateOrderStatusWithId(orderId, status, e);
+        document.getElementById("status-form-" + orderId).reset();
+        document.getElementById("row-order-status-" + orderId).textContent = status;
+      });
+    });
+  } catch (err) {
+    area.textContent = "Unable to load orders.";
+    showMessage(err.message || "Unable to load orders.", "error");
   }
 }
 

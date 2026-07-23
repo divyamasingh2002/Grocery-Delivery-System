@@ -379,6 +379,13 @@ th {
   margin-top: 6px;
 }
 
+.add-cart-btn {
+  height: 30px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 12px;
+}
 /* ---------- Empty state ---------- */
 .empty-state {
   text-align: center;

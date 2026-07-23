@@ -5,7 +5,16 @@
 // Backend endpoints used:
 //   GET  /api/cart     -> get the user's cart
 //   POST /api/orders   -> place a new order
-
+import {
+  apiRequest,
+  showMessage,
+  escapeHtml,
+  formatPrice,
+  isAdmin,
+  isDelivery,
+  requireLogin,
+  getUser,
+} from "./common.js";
 const DELIVERY_CHARGE = 40; // flat delivery charge for this project
 
 document.addEventListener("DOMContentLoaded", () => {

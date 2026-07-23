@@ -87,25 +87,18 @@
         </div>
       </div>
 
-      <!-- Order Status Management -->
-      <div class="admin-section">
-        <h2>Order Status Management</h2>
-        <p style="color:#666;margin-bottom:12px;">
-          Update the status of an order if you know its Order ID.
-        </p>
+    
 
-        <!-- NOTE:
-             The current backend does NOT provide an endpoint to fetch ALL
-             orders for an admin (e.g. GET /api/admin/orders). So instead of
-             inventing a fake API, the admin can enter an order ID and update
-             its status using the existing endpoint:
-                 PUT /api/orders/:id/status
-             Once a GET /api/admin/orders endpoint is added to the backend,
-             this section can be upgraded to list all orders automatically.
-        -->
+      <!-- Order Status Management (manual fallback) -->
+      <div class="admin-section">
+        <h2>Update Order by ID</h2>
+        <p style="color:#666;margin-bottom:12px;">
+          Use this if you only have an Order ID and need to update its status.
+        </p>
         <form id="status-form" class="inline-form">
           <input type="text" id="order-id" placeholder="Order ID" required />
           <select id="order-status">
+            <option value="" selected>Select Status</option>
             <option value="Placed">Placed</option>
             <option value="Confirmed">Confirmed</option>
             <option value="Preparing">Preparing</option>
@@ -115,6 +108,29 @@
           </select>
           <button type="submit" class="btn">Update Status</button>
         </form>
+      </div>
+        <!-- All Orders -->
+      <div class="admin-section">
+        <h2>All Orders</h2>
+        <p style="color:#666;margin-bottom:12px;">
+          Every order placed in the system. Change the status dropdown to update an order.
+        </p>
+        <div id="admin-order-area" class="loading">Loading orders...</div>
+         <div class="table-card" style="display:none;" id="admin-order-table">
+              <table>
+                <thead>
+                  <tr>
+                    <th>S.No.</th>
+                    <th>Customer Name</th>
+                    <th>Total</th>
+                    <th>Status</th>
+                    <th>Payment</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-order-rows"></tbody>
+              </table>
+            </div>
       </div>
     </div>
 

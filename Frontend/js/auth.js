@@ -5,6 +5,8 @@
 //   POST /api/users/login
 // On success the JWT token and user details are saved in localStorage.
 
+import { showMessage, isLoggedIn,apiRequest, saveAuth, getCurrentUser  } from "./common.js";
+
 document.addEventListener("DOMContentLoaded", () => {
   // If already logged in, redirect based on role.
   if (isLoggedIn()) {
@@ -40,6 +42,8 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 1500);
       } catch (err) {
         // Show a friendly error message.
+        console.log("on line 45");
+        
         showMessage(err.message || "Registration failed.", "error");
       }
     });
@@ -72,6 +76,8 @@ document.addEventListener("DOMContentLoaded", () => {
           redirectByRole();
         }, 1000);
       } catch (err) {
+        console.log("I am on line 77");
+        
         showMessage(err.message || "Invalid email or password.", "error");
       }
     });

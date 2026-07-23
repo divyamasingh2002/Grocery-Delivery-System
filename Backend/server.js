@@ -673,6 +673,24 @@ app.get("/api/orders/:id", authenticate, async (req, res) => {
     });
   }
 });
+// =======================
+// Get all orders (admin/delivery only)
+// =======================
+
+app.get("/api/admin/orders",authenticate, async (req, res) => {
+  if (
+        req.user.role !== "admin" 
+      ) {
+        return res.status(403).json({
+          message: "Not authorized",
+        });
+      }
+  const orders = await Order.find()
+    .populate("user", "name email")
+    .populate("items.product", "name price")
+    .sort({ createdAt: -1 });
+  res.json(orders);
+});
 
 // =======================
 // UPDATE ORDER STATUS

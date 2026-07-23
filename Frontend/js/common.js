@@ -17,41 +17,41 @@ const API_URL = "http://localhost:5000/api";
 // ---------------------------------------------------------------------------
 
 // Returns the saved JWT token (or null if not logged in).
-function getToken() {
+export function getToken() {
   return localStorage.getItem("token");
 }
 
 // Returns the saved user object (or null).
-function getUser() {
+export function getUser() {
   const user = localStorage.getItem("user");
   return user ? JSON.parse(user) : null;
 }
 
 // Is the visitor logged in?
-function isLoggedIn() {
+export function isLoggedIn() {
   return !!getToken();
 }
 
 // Is the logged-in user an admin?
-function isAdmin() {
+export function isAdmin() {
   const user = getUser();
   return user && user.role === "admin";
 }
 
 // Is the logged-in user a delivery user?
-function isDelivery() {
+export function isDelivery() {
   const user = getUser();
   return user && user.role === "delivery";
 }
 
 // Returns the current logged-in user object (or null).
 // Alias for getUser() to match the naming used in the API spec.
-function getCurrentUser() {
+export function getCurrentUser() {
   return getUser();
 }
 
 // Build the standard auth + JSON headers used for protected requests.
-function getAuthHeaders() {
+export function getAuthHeaders() {
   const token = getToken();
   return {
     "Content-Type": "application/json",
@@ -60,13 +60,13 @@ function getAuthHeaders() {
 }
 
 // Save token + user after login or register.
-function saveAuth(token, user) {
+export function saveAuth(token, user) {
   localStorage.setItem("token", token);
   localStorage.setItem("user", JSON.stringify(user));
 }
 
 // Logout: clear storage and go to login page.
-function logout() {
+export function logout() {
   localStorage.removeItem("token");
   localStorage.removeItem("user");
   window.location.href = "login.html";
@@ -74,7 +74,7 @@ function logout() {
 
 // Redirect to login page if the visitor is not logged in.
 // Used on Cart and Orders pages.
-function requireLogin() {
+export function requireLogin() {
   if (!isLoggedIn()) {
     window.location.href = "login.html";
     return false;
@@ -91,7 +91,7 @@ function requireLogin() {
 //   - sets JSON content type for requests with a body
 //   - returns parsed JSON
 //   - throws a friendly Error on network/HTTP problems
-async function apiRequest(path, options = {}) {
+export async function apiRequest(path, options = {}) {
   const url = API_URL + path;
   const headers = options.headers || {};
 
@@ -137,13 +137,13 @@ async function apiRequest(path, options = {}) {
 // ---------------------------------------------------------------------------
 
 // Format a number as Indian Rupees, e.g. 120 -> "₹120".
-function formatPrice(amount) {
+export function formatPrice(amount) {
   return "₹" + Number(amount || 0);
 }
 
 // Show a short message inside an element with id "message".
 // type = "success" | "error" | "info"
-function showMessage(text, type = "success") {
+export function showMessage(text, type = "success") {
   const box = document.getElementById("message");
   if (!box) {
     alert(text);
@@ -159,7 +159,7 @@ function showMessage(text, type = "success") {
 }
 
 // Escape user/back-end text before injecting into innerHTML (prevents XSS).
-function escapeHtml(str) {
+export function escapeHtml(str) {
   if (str == null) return "";
   return String(str)
     .replace(/&/g, "&amp;")
@@ -173,7 +173,7 @@ function escapeHtml(str) {
 // Navbar (rendered by JS so it can change with login state)
 // ---------------------------------------------------------------------------
 
-function renderNavbar() {
+export function renderNavbar() {
   const nav = document.getElementById("navbar");
   if (!nav) return;
 
@@ -227,7 +227,7 @@ function renderNavbar() {
 }
 
 // Render the shared footer.
-function renderFooter() {
+export function renderFooter() {
   const footer = document.getElementById("footer");
   if (!footer) return;
   footer.innerHTML = `
