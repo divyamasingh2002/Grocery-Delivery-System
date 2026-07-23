@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Panel | FreshCart</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div id="navbar"></div>
+
+    <div class="container">
+      <h1 class="page-title">Admin Panel</h1>
+
+      <div id="message" class="message"></div>
+
+      <!-- Product Management -->
+      <div class="admin-section">
+        <h2>Product Management</h2>
+
+        <div class="admin-grid">
+          <!-- Add / Edit product form -->
+          <div>
+            <h3 id="form-title">Add Product</h3>
+            <form id="product-form">
+              <input type="hidden" id="product-id" />
+              <div class="form-group">
+                <label for="p-name">Product Name</label>
+                <input type="text" id="p-name" required />
+              </div>
+              <div class="form-group">
+                <label for="p-category">Category</label>
+                <input type="text" id="p-category" />
+              </div>
+              <div class="form-group">
+                <label for="p-desc">Description</label>
+                <textarea id="p-desc"></textarea>
+              </div>
+              <div class="form-group">
+                <label for="p-price">Price</label>
+                <input type="number" id="p-price" min="0" step="1" required />
+              </div>
+              <div class="form-group">
+                <label for="p-qty">Quantity</label>
+                <input type="number" id="p-qty" min="0" step="1" />
+              </div>
+              <div class="form-group">
+                <label for="p-unit">Unit</label>
+                <input type="text" id="p-unit" placeholder="kg / dozen / litre" />
+              </div>
+              <div class="form-group">
+                <label for="p-image">Image URL</label>
+                <input type="text" id="p-image" />
+              </div>
+              <div class="form-group">
+                <label for="p-available">Available</label>
+                <select id="p-available">
+                  <option value="true">Yes</option>
+                  <option value="false">No</option>
+                </select>
+              </div>
+              <button type="submit" class="btn" id="save-btn">Save Product</button>
+              <button type="button" class="btn btn-outline" id="cancel-edit" style="display:none;">Cancel</button>
+            </form>
+          </div>
+
+          <!-- Product list -->
+          <div>
+            <h3>Existing Products</h3>
+            <div id="admin-product-area" class="loading">Loading products...</div>
+            <div class="table-card" style="display:none;" id="admin-product-table">
+              <table>
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Qty</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-product-rows"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Order Status Management -->
+      <div class="admin-section">
+        <h2>Order Status Management</h2>
+        <p style="color:#666;margin-bottom:12px;">
+          Update the status of an order if you know its Order ID.
+        </p>
+
+        <!-- NOTE:
+             The current backend does NOT provide an endpoint to fetch ALL
+             orders for an admin (e.g. GET /api/admin/orders). So instead of
+             inventing a fake API, the admin can enter an order ID and update
+             its status using the existing endpoint:
+                 PUT /api/orders/:id/status
+             Once a GET /api/admin/orders endpoint is added to the backend,
+             this section can be upgraded to list all orders automatically.
+        -->
+        <form id="status-form" class="inline-form">
+          <input type="text" id="order-id" placeholder="Order ID" required />
+          <select id="order-status">
+            <option value="Placed">Placed</option>
+            <option value="Confirmed">Confirmed</option>
+            <option value="Preparing">Preparing</option>
+            <option value="Out for Delivery">Out for Delivery</option>
+            <option value="Delivered">Delivered</option>
+            <option value="Cancelled">Cancelled</option>
+          </select>
+          <button type="submit" class="btn">Update Status</button>
+        </form>
+      </div>
+    </div>
+
+    <div id="footer"></div>
+
+    <script type="module" src="js/common.js"></script>
+    <script type="module" src="js/admin.js"></script>
+  </body>
+</html>

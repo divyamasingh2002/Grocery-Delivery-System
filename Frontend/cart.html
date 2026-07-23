@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cart | FreshCart</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div id="navbar"></div>
+
+    <div class="container">
+      <h1 class="page-title">My Cart</h1>
+
+      <div id="message" class="message"></div>
+      <div id="cart-area" class="loading">Loading cart...</div>
+
+      <!-- Cart items table + summary are injected here by cart.js -->
+      <div id="cart-content"></div>
+    </div>
+
+    <!-- Place Order modal -->
+    <div id="order-modal" class="modal-overlay">
+      <div class="modal">
+        <h2>Place Order</h2>
+        <form id="order-form">
+          <div class="form-group">
+            <label for="delivery-address">Delivery Address</label>
+            <textarea id="delivery-address" required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="payment-method">Payment Method</label>
+            <select id="payment-method">
+              <option value="COD">Cash on Delivery</option>
+              <option value="Online">Online Payment</option>
+            </select>
+          </div>
+          <div class="modal-actions">
+            <button type="submit" class="btn">Confirm Order</button>
+            <button type="button" id="cancel-order" class="btn btn-outline">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div id="footer"></div>
+
+    <script type="module" src="js/common.js"></script>
+    <script type="module" src="js/cart.js"></script>
+  </body>
+</html>

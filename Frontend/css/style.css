@@ -1,0 +1,544 @@
+/* style.css
+   Shared styles for the Grocery Delivery System frontend.
+   Simple green + white college-project theme.
+   Colors:
+     Primary Green : #4CAF50
+     Dark Green    : #2E7D32
+     Light Green   : #E8F5E9
+     Background    : #F7F9F7
+     Dark Text     : #333333
+     Light Text    : #666666
+     Border        : #DDDDDD
+     Error         : #D32F2F
+*/
+
+/* ---------- Base reset ---------- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background-color: #F7F9F7;
+  color: #333333;
+  line-height: 1.5;
+}
+
+a {
+  color: #2E7D32;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* ---------- Navbar ---------- */
+#navbar {
+  background-color: #4CAF50;
+  color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.nav-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 16px;
+  flex-wrap: wrap;
+}
+
+.brand {
+  color: #ffffff;
+  font-size: 1.3rem;
+  font-weight: bold;
+  padding: 14px 0;
+}
+
+.nav-links {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.nav-links a {
+  color: #ffffff;
+  padding: 14px 0;
+  font-size: 0.95rem;
+}
+
+.nav-links a:hover {
+  color: #E8F5E9;
+}
+
+/* ---------- Page container ---------- */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+
+.page-title {
+  color: #2E7D32;
+  margin-bottom: 20px;
+  font-size: 1.6rem;
+}
+
+/* ---------- Hero section (home page) ---------- */
+.hero {
+  background-color: #E8F5E9;
+  text-align: center;
+  padding: 48px 20px;
+}
+
+.hero h1 {
+  color: #2E7D32;
+  font-size: 2rem;
+  margin-bottom: 12px;
+}
+
+.hero p {
+  color: #555;
+  margin-bottom: 20px;
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-block;
+  background-color: #4CAF50;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 0.95rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.btn:hover {
+  background-color: #2E7D32;
+}
+
+.btn-outline {
+  background-color: transparent;
+  color: #4CAF50;
+  border: 1px solid #4CAF50;
+}
+
+.btn-outline:hover {
+  background-color: #E8F5E9;
+}
+
+.btn-danger {
+  background-color: #D32F2F;
+}
+
+.btn-danger:hover {
+  background-color: #b71c1c;
+}
+
+.btn:disabled {
+  background-color: #bdbdbd;
+  cursor: not-allowed;
+}
+
+/* ---------- Feature cards (home page) ---------- */
+.features {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-top: 32px;
+}
+
+.feature-card {
+  background: #ffffff;
+  border: 1px solid #DDDDDD;
+  border-radius: 6px;
+  padding: 20px;
+  text-align: center;
+}
+
+.feature-card h3 {
+  color: #2E7D32;
+  margin-bottom: 8px;
+  font-size: 1.05rem;
+}
+
+.feature-card p {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+/* ---------- Product grid ---------- */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+.product-card {
+  background: #ffffff;
+  border: 1px solid #DDDDDD;
+  border-radius: 6px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-card img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  background-color: #f0f0f0;
+}
+
+.product-card .card-body {
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+.product-card h3 {
+  font-size: 1.05rem;
+  color: #333;
+}
+
+.product-card .category {
+  font-size: 0.8rem;
+  color: #666;
+  background: #E8F5E9;
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 10px;
+  width: fit-content;
+}
+
+.product-card .desc {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.product-card .price {
+  color: #2E7D32;
+  font-weight: bold;
+  font-size: 1.05rem;
+}
+
+.product-card .out-of-stock {
+  color: #D32F2F;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.product-card .card-actions {
+  padding: 0 14px 14px 14px;
+  margin-top: auto;
+}
+
+/* ---------- Forms ---------- */
+.form-card {
+  background: #ffffff;
+  border: 1px solid #DDDDDD;
+  border-radius: 6px;
+  max-width: 460px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #DDDDDD;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  font-family: inherit;
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 70px;
+}
+
+.form-card .btn {
+  width: 100%;
+}
+
+.form-link {
+  text-align: center;
+  margin-top: 14px;
+  font-size: 0.9rem;
+}
+
+/* ---------- Message box ---------- */
+.message {
+  display: none;
+  padding: 10px 14px;
+  border-radius: 4px;
+  margin-bottom: 16px;
+  font-size: 0.9rem;
+}
+
+.message.success {
+  background-color: #E8F5E9;
+  color: #2E7D32;
+  border: 1px solid #4CAF50;
+}
+
+.message.error {
+  background-color: #ffebee;
+  color: #D32F2F;
+  border: 1px solid #D32F2F;
+}
+
+.message.info {
+  background-color: #E8F5E9;
+  color: #2E7D32;
+}
+
+/* ---------- Cart / Orders tables ---------- */
+.table-card {
+  background: #ffffff;
+  border: 1px solid #DDDDDD;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #DDDDDD;
+}
+
+th {
+  background-color: #E8F5E9;
+  color: #2E7D32;
+  font-size: 0.9rem;
+}
+
+.cart-thumb {
+  width: 56px;
+  height: 56px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.qty-input {
+  width: 64px;
+  padding: 6px;
+  border: 1px solid #DDDDDD;
+  border-radius: 4px;
+}
+
+/* ---------- Cart summary ---------- */
+.cart-summary {
+  background: #ffffff;
+  border: 1px solid #DDDDDD;
+  border-radius: 6px;
+  padding: 20px;
+  margin-top: 20px;
+  max-width: 360px;
+  margin-left: auto;
+}
+
+.cart-summary .row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.cart-summary .total {
+  font-weight: bold;
+  color: #2E7D32;
+  border-top: 1px solid #DDDDDD;
+  padding-top: 10px;
+  margin-top: 6px;
+}
+
+/* ---------- Empty state ---------- */
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: #666;
+}
+
+.empty-state .btn {
+  margin-top: 16px;
+}
+
+/* ---------- Status badges ---------- */
+.badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.badge.placed { background: #E8F5E9; color: #2E7D32; }
+.badge.confirmed { background: #E3F2FD; color: #1565C0; }
+.badge.preparing { background: #FFF8E1; color: #F57F17; }
+.badge.out_for_delivery { background: #FFF3E0; color: #E65100; }
+.badge.delivered { background: #E8F5E9; color: #2E7D32; }
+.badge.cancelled { background: #ffebee; color: #D32F2F; }
+
+/* ---------- Admin layout ---------- */
+.admin-section {
+  background: #ffffff;
+  border: 1px solid #DDDDDD;
+  border-radius: 6px;
+  padding: 20px;
+  margin-bottom: 24px;
+}
+
+.admin-section h2 {
+  color: #2E7D32;
+  margin-bottom: 16px;
+  font-size: 1.2rem;
+}
+
+.admin-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 20px;
+}
+
+.product-row img {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.inline-form {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.inline-form select,
+.inline-form input {
+  padding: 6px;
+  border: 1px solid #DDDDDD;
+  border-radius: 4px;
+  font-size: 0.85rem;
+}
+
+/* ---------- Modal (place order) ---------- */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+
+.modal-overlay.active {
+  display: flex;
+}
+
+.modal {
+  background: #ffffff;
+  border-radius: 6px;
+  padding: 24px;
+  width: 90%;
+  max-width: 420px;
+}
+
+.modal h2 {
+  color: #2E7D32;
+  margin-bottom: 16px;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+/* ---------- Loading ---------- */
+.loading {
+  text-align: center;
+  padding: 30px;
+  color: #666;
+}
+
+/* ---------- Footer ---------- */
+#footer {
+  background-color: #2E7D32;
+  color: #ffffff;
+  text-align: center;
+  padding: 16px;
+  margin-top: 40px;
+  font-size: 0.85rem;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+  .features {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .admin-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .nav-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .nav-links {
+    width: 100%;
+    justify-content: space-between;
+    padding-bottom: 10px;
+  }
+  .features {
+    grid-template-columns: 1fr;
+  }
+  .product-grid {
+    grid-template-columns: 1fr;
+  }
+  .form-card {
+    padding: 18px;
+  }
+  table {
+    font-size: 0.85rem;
+  }
+  th, td {
+    padding: 8px;
+  }
+  .cart-thumb {
+    display: none;
+  }
+}
